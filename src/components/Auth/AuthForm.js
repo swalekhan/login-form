@@ -1,8 +1,10 @@
-import { useRef, useState } from 'react';
-
+import { useContext, useRef, useState } from 'react';
+import Context from '../../store/Context';
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
+  const abc = useContext(Context)
+
   const [spinar, setSpiner] = useState(false)
   const [isLogin, setIsLogin] = useState(true);
   const passRef = useRef()
@@ -48,6 +50,7 @@ const AuthForm = () => {
       }
 
     }).then((data)=>{
+      abc.addToken(data.idToken)
      console.log(data)
     }).catch((err)=>{
       alert(err.message)
