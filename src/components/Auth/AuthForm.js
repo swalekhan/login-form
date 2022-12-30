@@ -1,10 +1,11 @@
 import { useContext, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../store/Context';
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
   const abc = useContext(Context)
-
+  const history = useHistory() //Using the history instance you can redirect users to another page.
   const [spinar, setSpiner] = useState(false)
   const [isLogin, setIsLogin] = useState(true);
   const passRef = useRef()
@@ -51,7 +52,7 @@ const AuthForm = () => {
 
     }).then((data)=>{
       abc.addToken(data.idToken)
-     console.log(data)
+      history.replace('/') // enter path where you want to go
     }).catch((err)=>{
       alert(err.message)
     })

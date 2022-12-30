@@ -1,8 +1,10 @@
 import { useContext, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import Context from '../../store/Context';
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
+  const history = useHistory();
   const abc = useContext(Context);
   const passRef = useRef()
 
@@ -19,7 +21,7 @@ const ProfileForm = () => {
     }).then((res) => {
       return res.json();
     }).then((data) => {
-      console.log(data)
+        history.replace('/') //path
     }).catch((err)=>{
       console.log(err)
     })
