@@ -2,26 +2,27 @@ import { useState } from "react";
 import Context from "./Context";
 
 
-const ContextProvider = (props)=>{
-   const [token, setToken] = useState(null);
+const ContextProvider = (props) => {
+    const intialStoreTokenInLocalStorage = localStorage.getItem("token")
+    const [token, setToken] = useState(intialStoreTokenInLocalStorage);
 
-   console.log("token......",token)
+    const navState = !!token  // note : this line
 
-      const navState = !!token  // note : this line
+    const addTokenHandler = (newToken) => {
+        setToken(newToken)
+        localStorage.setItem("token", newToken)
+    }
 
-     const addTokenHandler = (newToken) =>{
-       setToken(newToken)
-     }
-
-     const removeTokenHandler = () =>{
+    const removeTokenHandler = () => {
         setToken(null)
-     }
+        localStorage.removeItem("token");
+    }
 
-    const values  = {
-        token:token,
-        navState:navState,
-        addToken:addTokenHandler,
-        removeToken:removeTokenHandler 
+    const values = {
+        token: token,
+        navState: navState,
+        addToken: addTokenHandler,
+        removeToken: removeTokenHandler
     }
 
     return (
