@@ -3,22 +3,22 @@ import Context from "./Context";
 
 
 const ContextProvider = (props)=>{
-   const [token, setToken] = useState();
-   const [navState, setNavState] = useState(false)
+   const [token, setToken] = useState(null);
 
    console.log("token......",token)
-      
+
+      const navState = !!token  // note : this line
+
      const addTokenHandler = (newToken) =>{
        setToken(newToken)
-       setNavState(true)
      }
 
      const removeTokenHandler = () =>{
-        setToken("")
-        setNavState(false)
+        setToken(null)
      }
 
     const values  = {
+        token:token,
         navState:navState,
         addToken:addTokenHandler,
         removeToken:removeTokenHandler 

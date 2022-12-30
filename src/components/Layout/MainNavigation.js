@@ -4,9 +4,9 @@ import Context from '../../store/Context';
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = () => {
-     const abc = useContext(Context)
+  const abc = useContext(Context)
   const logoutHandler = () => {
-  abc.removeToken()
+    abc.removeToken()
   }
 
   return (
@@ -16,15 +16,16 @@ const MainNavigation = () => {
       </Link>
       <nav>
         <ul>
+          { !abc.navState &&
           <li>
             <Link to='/auth'>Login</Link>
           </li>
-          <li>
-           {abc.navState  && <Link to='/profile'>Profile</Link>}
-          </li>
-          <li>
-            {abc.navState  &&<button onClick={logoutHandler}>Logout</button>}
-          </li>
+          }
+
+          {abc.navState && <li><Link to='/profile'>Profile</Link></li>}
+
+          {abc.navState && <li><button onClick={logoutHandler}>Logout</button></li>}
+
         </ul>
       </nav>
     </header>
